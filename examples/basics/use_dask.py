@@ -26,9 +26,9 @@ Y_test = to_categorical(Y_test, 10)
 # (Note that it can work with HDF5 Dataset too)
 import dask.array as da
 X = da.from_array(np.asarray(X), chunks=(1000, 1000, 1000, 1000))
-Y = da.from_array(np.asarray(Y), chunks=(1000, 1000, 1000, 1000))
+Y = da.from_array(np.asarray(Y), chunks=(1000, 1000))
 X_test = da.from_array(np.asarray(X_test), chunks=(1000, 1000, 1000, 1000))
-Y_test = da.from_array(np.asarray(Y_test), chunks=(1000, 1000, 1000, 1000))
+Y_test = da.from_array(np.asarray(Y_test), chunks=(1000, 1000))
 
 # Build network
 network = input_data(shape=[None, 32, 32, 3])
