@@ -15,9 +15,11 @@ from __future__ import division, print_function, absolute_import
 
 import tflearn
 
+datapath = '../../data/mnist'
+
 # Data loading and preprocessing
 import tflearn.datasets.mnist as mnist
-X, Y, testX, testY = mnist.load_data(one_hot=True)
+X, Y, testX, testY = mnist.load_data(one_hot=True, data_dir=datapath)
 
 # Building deep neural network
 input_layer = tflearn.input_data(shape=[None, 784])
