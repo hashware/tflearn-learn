@@ -1,0 +1,2 @@
+model_checkpoint_path: "/home/tony/win7map/tflearn-learn/examples/basics/wp-ckpt/model.tfl.ckpt-1720"
+all_model_checkpoint_paths: "/home/tony/win7map/tflearn-learn/examples/basics/wp-ckpt/model.tfl.ckpt-1720"
