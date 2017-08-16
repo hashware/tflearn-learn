@@ -1,0 +1,4 @@
+model_checkpoint_path: "/home/tony/win7map/tflearn-learn/examples/basics/ft-ckpt/model_finetuning"
+all_model_checkpoint_paths: "/home/tony/win7map/tflearn-learn/examples/basics/ft-ckpt/model_finetuning-32800"
+all_model_checkpoint_paths: "/home/tony/win7map/tflearn-learn/examples/basics/ft-ckpt/model_finetuning-33000"
+all_model_checkpoint_paths: "/home/tony/win7map/tflearn-learn/examples/basics/ft-ckpt/model_finetuning"
