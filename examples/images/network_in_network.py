@@ -20,9 +20,11 @@ from tflearn.layers.core import input_data, dropout, flatten
 from tflearn.layers.conv import conv_2d, max_pool_2d, avg_pool_2d
 from tflearn.layers.estimator import regression
 
+datapath = '../../data/cifar-10-batches-py'
+
 # Data loading and preprocessing
 from tflearn.datasets import cifar10
-(X, Y), (X_test, Y_test) = cifar10.load_data()
+(X, Y), (X_test, Y_test) = cifar10.load_data(dirname=datapath)
 X, Y = shuffle(X, Y)
 Y = to_categorical(Y, 10)
 Y_test = to_categorical(Y_test, 10)
@@ -50,5 +52,5 @@ network = regression(network, optimizer='adam',
 
 # Training
 model = tflearn.DNN(network)
-model.fit(X, Y, n_epoch=50, shuffle=True, validation_set=(X_test, Y_test),
+model.fit(X, Y, n_epoch=5, shuffle=True, validation_set=(X_test, Y_test),
           show_metric=True, batch_size=128, run_id='cifar10_net_in_net')
