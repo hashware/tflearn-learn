@@ -1,0 +1,4 @@
+model_checkpoint_path: "/home/tony/win7map/tflearn-learn/examples/images/cm-ckpt/model.cm.ckpt-8600"
+all_model_checkpoint_paths: "/home/tony/win7map/tflearn-learn/examples/images/cm-ckpt/model.cm.ckpt-8400"
+all_model_checkpoint_paths: "/home/tony/win7map/tflearn-learn/examples/images/cm-ckpt/model.cm.ckpt-8500"
+all_model_checkpoint_paths: "/home/tony/win7map/tflearn-learn/examples/images/cm-ckpt/model.cm.ckpt-8600"
