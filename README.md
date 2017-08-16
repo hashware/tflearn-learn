@@ -7,3 +7,5 @@ examples来自
 
 使每个示例程序都能运行起来
 
+指定使用哪个GPU
+CUDA_VISIBLE_DEVICES="0" python xxx.py
