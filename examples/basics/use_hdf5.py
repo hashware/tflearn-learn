@@ -16,15 +16,17 @@ from tflearn.data_utils import *
 from tflearn.layers.normalization import *
 from tflearn.layers.estimator import regression
 
+datapath = '../../data/cifar-10-batches-py'
+
 # CIFAR-10 Dataset
 from tflearn.datasets import cifar10
-(X, Y), (X_test, Y_test) = cifar10.load_data()
+(X, Y), (X_test, Y_test) = cifar10.load_data(dirname=datapath)
 Y = to_categorical(Y, 10)
 Y_test = to_categorical(Y_test, 10)
 
 # Create a hdf5 dataset from CIFAR-10 numpy array
 import h5py
-h5f = h5py.File('data.h5', 'w')
+h5f = h5py.File('uh/data.h5', 'w')
 h5f.create_dataset('cifar10_X', data=X)
 h5f.create_dataset('cifar10_Y', data=Y)
 h5f.create_dataset('cifar10_X_test', data=X_test)
@@ -32,7 +34,7 @@ h5f.create_dataset('cifar10_Y_test', data=Y_test)
 h5f.close()
 
 # Load hdf5 dataset
-h5f = h5py.File('data.h5', 'r')
+h5f = h5py.File('uh/data.h5', 'r')
 X = h5f['cifar10_X']
 Y = h5f['cifar10_Y']
 X_test = h5f['cifar10_X_test']
@@ -54,7 +56,7 @@ network = regression(network, optimizer='adam',
 
 # Training
 model = tflearn.DNN(network, tensorboard_verbose=0)
-model.fit(X, Y, n_epoch=50, shuffle=True, validation_set=(X_test, Y_test),
+model.fit(X, Y, n_epoch=5, shuffle=True, validation_set=(X_test, Y_test),
           show_metric=True, batch_size=96, run_id='cifar10_cnn')
 
 h5f.close()
