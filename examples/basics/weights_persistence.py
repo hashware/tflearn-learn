@@ -6,8 +6,10 @@ import tflearn
 
 import tflearn.datasets.mnist as mnist
 
+datapath = '../../data/mnist'
+
 # MNIST Data
-X, Y, testX, testY = mnist.load_data(one_hot=True)
+X, Y, testX, testY = mnist.load_data(one_hot=True, data_dir=datapath)
 
 # Model
 input_layer = tflearn.input_data(shape=[None, 784], name='input')
@@ -19,7 +21,7 @@ regression = tflearn.regression(softmax, optimizer='adam',
                                 loss='categorical_crossentropy')
 
 # Define classifier, with model checkpoint (autosave)
-model = tflearn.DNN(regression, checkpoint_path='model.tfl.ckpt')
+model = tflearn.DNN(regression, checkpoint_path='wp-ckpt/model.tfl.ckpt')
 
 # Train model, with model checkpoint every epoch and every 200 training steps.
 model.fit(X, Y, n_epoch=1,
@@ -35,10 +37,10 @@ model.fit(X, Y, n_epoch=1,
 # ---------------------
 
 # Manually save model
-model.save("model.tfl")
+model.save("wp-ckpt/model.tfl")
 
 # Load a model
-model.load("model.tfl")
+model.load("wp-ckpt/model.tfl")
 
 # Or Load a model from auto-generated checkpoint
 # >> model.load("model.tfl.ckpt-500")
