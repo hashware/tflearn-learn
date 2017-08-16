@@ -23,8 +23,10 @@ from tflearn.layers.conv import conv_2d, max_pool_2d
 from tflearn.layers.normalization import local_response_normalization
 from tflearn.layers.estimator import regression
 
+datapath = '../../data/17flowers227'
+
 import tflearn.datasets.oxflower17 as oxflower17
-X, Y = oxflower17.load_data(one_hot=True, resize_pics=(227, 227))
+X, Y = oxflower17.load_data(one_hot=True, resize_pics=(227, 227), dirname=datapath)
 
 # Building 'AlexNet'
 network = input_data(shape=[None, 227, 227, 3])
@@ -49,8 +51,8 @@ network = regression(network, optimizer='momentum',
                      learning_rate=0.001)
 
 # Training
-model = tflearn.DNN(network, checkpoint_path='model_alexnet',
-                    max_checkpoints=1, tensorboard_verbose=2)
-model.fit(X, Y, n_epoch=1000, validation_set=0.1, shuffle=True,
-          show_metric=True, batch_size=64, snapshot_step=200,
+model = tflearn.DNN(network, checkpoint_path='an-ckpt/model_alexnet',
+                    max_checkpoints=3, tensorboard_verbose=2)
+model.fit(X, Y, n_epoch=5, validation_set=0.1, shuffle=True,
+          show_metric=True, batch_size=64, snapshot_step=50,
           snapshot_epoch=False, run_id='alexnet_oxflowers17')
