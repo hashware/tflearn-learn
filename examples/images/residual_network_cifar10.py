@@ -23,9 +23,11 @@ import tflearn
 # 32 layers: n=5, 56 layers: n=9, 110 layers: n=18
 n = 5
 
+datapath = '../../data/cifar-10-batches-py'
+
 # Data loading
 from tflearn.datasets import cifar10
-(X, Y), (testX, testY) = cifar10.load_data()
+(X, Y), (testX, testY) = cifar10.load_data(dirname=datapath)
 Y = tflearn.data_utils.to_categorical(Y, 10)
 testY = tflearn.data_utils.to_categorical(testY, 10)
 
@@ -57,11 +59,11 @@ mom = tflearn.Momentum(0.1, lr_decay=0.1, decay_step=32000, staircase=True)
 net = tflearn.regression(net, optimizer=mom,
                          loss='categorical_crossentropy')
 # Training
-model = tflearn.DNN(net, checkpoint_path='model_resnet_cifar10',
-                    max_checkpoints=10, tensorboard_verbose=0,
+model = tflearn.DNN(net, checkpoint_path='rnc-ckpt/model_resnet_cifar10',
+                    max_checkpoints=3, tensorboard_verbose=0,
                     clip_gradients=0.)
 
-model.fit(X, Y, n_epoch=200, validation_set=(testX, testY),
-          snapshot_epoch=False, snapshot_step=500,
+model.fit(X, Y, n_epoch=2, validation_set=(testX, testY),
+          snapshot_epoch=True, snapshot_step=500,
           show_metric=True, batch_size=128, shuffle=True,
           run_id='resnet_cifar10')
