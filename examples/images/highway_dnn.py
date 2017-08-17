@@ -14,9 +14,11 @@ from __future__ import division, print_function, absolute_import
 
 import tflearn
 
+datapath = '../../data/mnist'
+
 # Data loading and preprocessing
 import tflearn.datasets.mnist as mnist
-X, Y, testX, testY = mnist.load_data(one_hot=True)
+X, Y, testX, testY = mnist.load_data(one_hot=True, data_dir=datapath)
 
 # Building deep neural network
 input_layer = tflearn.input_data(shape=[None, 784])
@@ -41,5 +43,5 @@ net = tflearn.regression(softmax, optimizer=sgd, metric=top_k,
 
 # Training
 model = tflearn.DNN(net, tensorboard_verbose=0)
-model.fit(X, Y, n_epoch=20, validation_set=(testX, testY),
+model.fit(X, Y, n_epoch=2, validation_set=(testX, testY),
           show_metric=True, run_id="highway_dense_model")
