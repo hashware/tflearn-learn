@@ -23,7 +23,7 @@ from tflearn.data_utils import to_categorical, pad_sequences
 from tflearn.datasets import imdb
 
 # IMDB Dataset loading
-train, test, _ = imdb.load_data(path='imdb.pkl', n_words=10000,
+train, test, _ = imdb.load_data(path='../../data/imdb/imdb.pkl', n_words=10000,
                                 valid_portion=0.1)
 trainX, trainY = train
 testX, testY = test
@@ -47,4 +47,4 @@ net = tflearn.regression(net, optimizer='adam', learning_rate=0.001,
 # Training
 model = tflearn.DNN(net, tensorboard_verbose=0)
 model.fit(trainX, trainY, validation_set=(testX, testY), show_metric=True,
-          batch_size=32)
+          batch_size=32, n_epoch=3)

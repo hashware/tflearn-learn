@@ -7,14 +7,14 @@ import ssl
 import tflearn
 from tflearn.data_utils import *
 
-path = "US_Cities.txt"
+path = "../../data/US_Cities.txt"
 if not os.path.isfile(path):
     context = ssl._create_unverified_context()
     moves.urllib.request.urlretrieve("https://raw.githubusercontent.com/tflearn/tflearn.github.io/master/resources/US_Cities.txt", path, context=context)
 
 maxlen = 20
 
-string_utf8 = open(path, "r").read().decode('utf-8')
+string_utf8 = open(path, "r").read()
 X, Y, char_idx = \
     string_to_semi_redundant_sequences(string_utf8, seq_maxlen=maxlen, redun_step=3)
 
@@ -30,7 +30,7 @@ g = tflearn.regression(g, optimizer='adam', loss='categorical_crossentropy',
 m = tflearn.SequenceGenerator(g, dictionary=char_idx,
                               seq_maxlen=maxlen,
                               clip_gradients=5.0,
-                              checkpoint_path='model_us_cities')
+                              checkpoint_path='lgc-ckpt/model_us_cities')
 
 for i in range(40):
     seed = random_sequence_from_string(string_utf8, maxlen)

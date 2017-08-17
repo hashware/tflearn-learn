@@ -28,7 +28,7 @@ from tflearn.layers.recurrent import bidirectional_rnn, BasicLSTMCell
 from tflearn.layers.estimator import regression
 
 # IMDB Dataset loading
-train, test, _ = imdb.load_data(path='imdb.pkl', n_words=10000,
+train, test, _ = imdb.load_data(path='../../data/imdb/imdb.pkl', n_words=10000,
                                 valid_portion=0.1)
 trainX, trainY = train
 testX, testY = test
