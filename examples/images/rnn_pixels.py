@@ -10,8 +10,10 @@ from __future__ import division, print_function, absolute_import
 import numpy as np
 import tflearn
 
+datapath = '../../data/mnist'
+
 import tflearn.datasets.mnist as mnist
-X, Y, testX, testY = mnist.load_data(one_hot=True)
+X, Y, testX, testY = mnist.load_data(one_hot=True, data_dir=datapath)
 X = np.reshape(X, (-1, 28, 28))
 testX = np.reshape(testX, (-1, 28, 28))
 
@@ -21,6 +23,6 @@ net = tflearn.lstm(net, 128)
 net = tflearn.fully_connected(net, 10, activation='softmax')
 net = tflearn.regression(net, optimizer='adam',
                          loss='categorical_crossentropy', name="output1")
-model = tflearn.DNN(net, tensorboard_verbose=2)
+model = tflearn.DNN(net, tensorboard_verbose=2, checkpoint_path='rp-ckpt/rnn-pixels')
 model.fit(X, Y, n_epoch=1, validation_set=0.1, show_metric=True,
           snapshot_step=100)
