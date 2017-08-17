@@ -20,9 +20,11 @@ from tflearn.layers.conv import highway_conv_2d, max_pool_2d
 from tflearn.layers.normalization import local_response_normalization, batch_normalization
 from tflearn.layers.estimator import regression
 
+datapath = '../../data/mnist'
+
 # Data loading and preprocessing
 import tflearn.datasets.mnist as mnist
-X, Y, testX, testY = mnist.load_data(one_hot=True)
+X, Y, testX, testY = mnist.load_data(one_hot=True, data_dir=datapath)
 X = X.reshape([-1, 28, 28, 1])
 testX = testX.reshape([-1, 28, 28, 1])
 
@@ -43,5 +45,5 @@ network = regression(network, optimizer='adam', learning_rate=0.01,
 
 # Training
 model = tflearn.DNN(network, tensorboard_verbose=0)
-model.fit(X, Y, n_epoch=20, validation_set=(testX, testY),
+model.fit(X, Y, n_epoch=2, validation_set=(testX, testY),
           show_metric=True, run_id='convnet_highway_mnist')
