@@ -20,8 +20,10 @@ from tflearn.layers.normalization import local_response_normalization
 from tflearn.layers.merge_ops import merge
 from tflearn.layers.estimator import regression
 
+datapath = '../../data/17flowers227'
+
 import tflearn.datasets.oxflower17 as oxflower17
-X, Y = oxflower17.load_data(one_hot=True, resize_pics=(227, 227))
+X, Y = oxflower17.load_data(one_hot=True, resize_pics=(227, 227), dirname=datapath)
 
 
 network = input_data(shape=[None, 227, 227, 3])
@@ -139,8 +141,8 @@ loss = fully_connected(pool5_7_7, 17,activation='softmax')
 network = regression(loss, optimizer='momentum',
                      loss='categorical_crossentropy',
                      learning_rate=0.001)
-model = tflearn.DNN(network, checkpoint_path='model_googlenet',
-                    max_checkpoints=1, tensorboard_verbose=2)
-model.fit(X, Y, n_epoch=1000, validation_set=0.1, shuffle=True,
+model = tflearn.DNN(network, checkpoint_path='gn-ckpt/model_googlenet',
+                    max_checkpoints=2, tensorboard_verbose=2)
+model.fit(X, Y, n_epoch=2, validation_set=0.1, shuffle=True,
           show_metric=True, batch_size=64, snapshot_step=200,
-          snapshot_epoch=False, run_id='googlenet_oxflowers17')
+          snapshot_epoch=True, run_id='googlenet_oxflowers17')
