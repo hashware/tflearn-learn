@@ -21,9 +21,11 @@ import numpy as np
 import tensorflow as tf
 import tflearn
 
+datapath = '../../data/mnist'
+
 # Data loading and preprocessing
 import tflearn.datasets.mnist as mnist
-X, Y, testX, testY = mnist.load_data()
+X, Y, testX, testY = mnist.load_data(data_dir=datapath)
 
 image_dim = 784 # 28*28 pixels
 z_dim = 200 # Noise data points
@@ -78,7 +80,7 @@ z = np.random.uniform(-1., 1., size=[total_samples, z_dim])
 # Start training, feed both noise and real images.
 gan.fit(X_inputs={gen_input: z, disc_input: X},
         Y_targets=None,
-        n_epoch=100)
+        n_epoch=5)
 
 # Generate images from noise, using the generator network.
 f, a = plt.subplots(2, 10, figsize=(10, 4))
